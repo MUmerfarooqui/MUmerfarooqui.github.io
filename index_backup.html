@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Portfolio</title>
+
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="left">
+            <a href="#about">Umer Farooqui</a>
+        </div>
+
+        <div class="right">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#career">Career</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            
+            <div class="social-links">
+                <a href="https://github.com/MUmerfarooqui" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/umer-farooqui-397989284/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="mailto:umer.farooqui@mail.utoronto.ca">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section-->
+    <main class="content">
+        <section class="hero-section">
+
+            <div class="text">
+                <h2>Hi, I'm Umer</h2>
+                <p>I am Muhammad Umer Farooqui, a Computer Science major with a Statistics minor at the University of Toronto, St. George campus.
+                     Born in Karachi, Pakistan, I bring a global perspective to my academic journey. I’m passionate about problem-solving, software development, and AI projects. I enjoy cooking, playing cricket, and football.</p>
+                <div class="links">
+                    <a href="#projects">
+                        <span>Projects</span>
+                        <i class="fa-solid fa-code"></i>
+                    </a>
+
+                    <a href="#Experiences">
+                        <span>Experience</span>
+                        <i class="fa-solid fa-id-card"></i>
+                    </a>
+
+                    <a href="#contact">
+                        <span>Contact</span>
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="headshot">
+                <img src="images/download.webp" alt="Umer Farooqui headshot">
+
+            </div>
+
+        </section>
+    </main>
+    <!-- Skills Section-->
+    <main>
+        <section id="projects" class="project-section">
+            <h2>Projects</h2>
+            <div class="project-text">
+                <h3>Uoft-Messenger</h3>
+                <p>UofT-Messenger is a robust Java-based social media chat application designed to facilitate seamless real-time communication.
+                    The application incorporates essential social media features such as messaging, friend management, and profile updates,
+                     all powered by an intuitive interface built with Java Swing. By leveraging MongoDB and REST APIs, the platform ensures efficient data storage and retrieval, enabling scalability and reliability even under heavy user activity.
+               </p>
+
+               <p>
+                   The application includes an advanced friend recommendation system that utilizes an external API to match users with shared interests,
+                    fostering meaningful connections and increasing user engagement.
+                     Development workflows were optimized with Maven for dependency management and build automation, 
+                     reducing deployment timelines by 20%. UofT-Messenger exemplifies a blend of cutting-edge technology and user-focused design, offering a comprehensive social networking experience.
+
+               </p>
+            </div>
+            <div class="cells">
+                <div class="cell" id="java-cell">
+                    <img src="images/java_3291669.webp" alt="java logo">
+                    <span>Java</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/MongoDB_Logomark_ForestGreen.webp" alt="MongoDB logo">
+                    <span>MongoDB</span>
+                </div>
+            </div>
+
+            
+            <div class="project-text">
+                <h3>Healthy</h3>
+                <p>Healthy is a C# WPF-based health monitoring application designed to collect, validate, and securely store user health metrics. 
+                    By integrating with an SQL database, the application ensures consistent data storage, enabling users to track historical health trends.
+                     Its user-friendly interface facilitates seamless interaction, making it an ideal tool for proactive health management.
+                </p>
+
+                <p>
+                    The application features advanced predictive analytics powered by a Flask-based API, which processes POST requests from the WPF client to interact with AI/ML models.
+                     Using scikit-learn, the system predicts heart disease and blood sugar risks, providing users with personalized health insights. Healthy combines modern data science with intuitive design, empowering users to make informed decisions about their health.
+                </p>
+            </div>
+            <div class="cells">
+                <div class="cell" id="cell">
+                    <img src="images/Csharp_Logo.webp" alt="C-Sharp logo">
+                    <span>C-Sharp</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/icons8-python-48.webp" alt="Python logo">
+                    <span>Python</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/sql-server.webp" alt="SQL logo">
+                    <span>SQL</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/pngegg.webp" alt="SQL logo">
+                    <span>AI/ML</span>
+                </div>
+            </div>
+
+            <div class="project-text">
+                <h3>LibTrack</h3>
+                <p>The MERN-STACK Library Management System is a comprehensive platform designed for efficient book management and user authentication.
+                     With a React-based front-end, the system provides an intuitive and responsive interface for users to easily navigate and interact with the application.
+                      The back-end, powered by Express.js and Node.js, ensures robust functionality and reliability, enabling smooth operation across all features.
+                </p>
+
+                <p>
+                    Seamless communication between the application and the database is achieved through REST APIs, facilitating 
+                    efficient data retrieval and updates in MongoDB. This integration enables real-time data flow, ensuring users can access and
+                     manage book information effortlessly. The system exemplifies modern web development practices, offering a scalable and user-friendly solution for library management.
+
+
+                </p>
+            </div>
+            <div class="cells">
+                <div class="cell" id="java-cell">
+                    <img src="images/MongoDB_Logomark_ForestGreen.webp" alt="MongoDB logo">
+                    <span>MongoDB</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/react-logo.webp" alt="react-logo logo">
+                    <span>React</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/html-logo.webp" alt="react-logo logo">
+                    <span>HTML</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/css-logo.webp" alt="react-logo logo">
+                    <span>CSS</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/node-logo.webp" alt="react-logo logo">
+                    <span>Node.js</span>
+                </div>
+
+                <div class="cell">
+                    <img src="images/icons8-express-js-50.png" alt="react-logo logo">
+                    <span>Express.js</span>
+                </div>
+            </div>
+
+            <div class="project-text">
+                <h3>CarGo</h3>
+                <p>CarGo is a collaborative project that utilizes Python, Graph Theory, and Tree data structures to recommend cars tailored to user preferences with precision. Featuring an interactive front end built with PyGame,
+                     CarGo enhances user experience while streamlining the car selection process. By combining advanced algorithms with a user-friendly interface, CarGo delivers accurate and efficient recommendations,
+                     showcasing the application of computational techniques to simplify decision-making in the automotive domain.
+                </p>
+            </div>
+            <div class="cells">
+                <div class="cell" id="java-cell">
+                    <img src="images/icons8-python-48.webp" alt="python logo">
+                    <span>Python</span>
+                </div>
+
+            </div>
+
+            <div class="project-text">
+                <h3>DrMario</h3>
+                <p>
+                    The Dr. Mario game was developed using MIPS assembly, featuring elements such as progressively increasing capsule speed, sound effects, and score tracking,
+                     which enhanced the overall gameplay experience. The project highlighted a strong understanding of assembly language and demonstrated the ability to implement game mechanics and optimizations at a low system level.
+                </p>
+            </div>
+            <div class="cells">
+                <div class="cell" id="cell">
+                    <img src="images/icons8-assembly-48.webp" alt="java logo">
+                    <span>Assembly</span>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <!-- Experience Section-->
+    <main>
+        <section id="Experiences" class="experience-section">
+            <h2>Experiences</h2>
+            <div class="project-text">
+                <h3>FnS Consulting - Part Time Developer</h3>
+                <p>During my time at FnS Consultancy, I collaborated with cross-functional teams to design and develop RESTful APIs and applications
+                     using C#, .NET, and Java, ensuring seamless integration of data across various systems. This effort significantly improved productivity and accelerated feature delivery. I also engineered scalable solutions and optimized query systems with SQL, C#, and Node.js,
+                     which enhanced database performance and boosted application efficiency by 25%. These improvements were critical in maintaining smooth operations and meeting project deadlines.
+                </p>
+            </div>
+
+            <div class="project-text">
+                <h3>Whales College - Student-Affairs Intern</h3>
+                <p>At Whales College, Karachi, I served as a Student Affairs Intern where I utilized advanced MS Office skills 
+                    to streamline data analysis and reporting, significantly improving workflow efficiency for project documentation
+                     and presentations. I led a team of five interns during orientation, coordinating events for over 300 new students and ensuring smooth communication through daily briefings and prompt responses to inquiries.
+                      This proactive approach reduced confusion and enhanced the overall orientation experience. Additionally, I contributed to the planning and execution of activities that helped new students integrate into college life, fostering a positive and welcoming environment.
+
+                </p>
+            </div>
+
+            <div class="project-text">
+                <h3>UofT AI Club - Community Engagement Team Lead</h3>
+                <p>As the Community Engagement Team Lead at UofT AI, I led initiatives to connect members with AI-related events, workshops, and industry professionals. I organized and managed community outreach efforts, creating opportunities 
+                    for students to engage with cutting-edge AI technologies and network with experts in the field. By coordinating with both internal and external stakeholders, 
+                    I fostered an environment of collaboration and learning. I also mentored team members, managed communications, and ensured the smooth execution of events, all of which contributed to the growth and impact of UofT AI within the University of Toronto community.
+                </p>
+            </div>
+        </section>
+    </main>
+    <!-- Contact Section-->
+    <main>
+        <section id="contact" class="contact-section">
+            <h2>Contact</h2>
+
+            <div class="group">
+                <div class="text">
+                    Have questions or want to collaborate? Feel free to send me a message using the form below! </div>
+
+                <form>
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+
+                    <label for="name">Email</label>
+                    <input type="email" id="name">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" cols="30" rows="10"></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+</body>
+</html>
