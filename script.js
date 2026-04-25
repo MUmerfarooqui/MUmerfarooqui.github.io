@@ -35,9 +35,7 @@ const coursesData = {
         icon: 'fas fa-chart-bar',
         courses: [
             { code: 'STA237H1', name: 'Probability, Statistics & Data Analysis I' },
-            { code: 'STA238H1', name: 'Probability, Statistics & Data Analysis II' },
-            { code: 'STA302H1', name: 'Methods of Data Analysis' },
-            { code: 'STA303H1', name: 'Data Analysis II' }
+            { code: 'STA238H1', name: 'Probability, Statistics & Data Analysis II' }
         ]
     },
     breadth: {
@@ -76,6 +74,7 @@ const careerData = {
     'incubella': {
         title: 'AI/SWE Intern',
         company: 'Incubella – <a href="https://mysentiment.ai" target="_blank" rel="noopener noreferrer">MySentiment.ai</a> / <a href="https://incubella.co" target="_blank" rel="noopener noreferrer">incubella.co</a>',
+        linkedin: 'https://www.linkedin.com/company/incubella/posts/?feedView=all',
         location: 'Toronto, ON',
         duration: 'Jun 2025 – Sep 2025',
         description: 'Spearheaded development of cutting-edge sentiment analysis platform, transforming social media data into actionable business intelligence.',
@@ -98,8 +97,9 @@ const careerData = {
     'rabyt': {
         title: 'Developer Intern',
         company: 'Rabyt – <a href="https://rabyt.ai" target="_blank" rel="noopener noreferrer">Rabyt.ai</a>',
+        linkedin: 'https://www.linkedin.com/company/rabytai/posts/?feedView=all',
         location: 'Toronto, ON',
-        duration: 'Jun 2025 – Present',
+        duration: 'May 2025 – Jun 2025',
         description: 'Contributing to the development of innovative financial technology solutions with cross-platform desktop applications and AI-driven analysis.',
         responsibilities: [
             'Contributed to the development of Rabyt.ai\'s cross-platform desktop application using Electron.js, enhancing product stability and user interface responsiveness',
@@ -113,6 +113,31 @@ const careerData = {
             'Enabled dynamic financial data manipulation and visualization',
             'Improved user experience for complex financial workflows',
             'Contributed to AI-driven financial analysis feature design'
+        ]
+    },
+    'genledge': {
+        title: 'Software Engineering Intern',
+        company: 'GenLedge – <a href="https://genledge.ai/" target="_blank" rel="noopener noreferrer">genledge.ai</a>',
+        linkedin: 'https://www.linkedin.com/company/genledge/posts/?feedView=all',
+        location: 'Toronto, ON',
+        duration: '2025 – Present',
+        description: 'Engineered autonomous agent infrastructure for an early-stage AI-powered accounting automation startup, enabling AI employees to independently execute, review, and deliver financial work end-to-end with zero human intervention.',
+        responsibilities: [
+            'Designed and implemented multi-agent orchestration pipelines in Python and FastAPI, enabling autonomous task handoff, peer review, and self-healing escalation across AI employees',
+            'Built a full artifact lifecycle system — from AI-generated financial reports through autonomous PM review, browser-based UAT, and publishing — with each stage driven by a separate AI agent heartbeat',
+            'Developed real-time streaming interfaces in React and TypeScript, including live artifact rendering, SSE-based chat, and a financial dashboard with dynamic charting',
+            'Integrated browser automation using Playwright and Chrome DevTools Protocol to enable AI agents to interact with external portals and visually validate deliverables',
+            'Built an email integration layer allowing AI employees to monitor inboxes, parse incoming financial documents, and trigger automated workflows in response',
+            'Managed PostgreSQL schema design and Alembic migrations to support evolving agent state machines and workflow models',
+            'Contributed across the full stack including a Tauri desktop application, REST API design, and Claude Code subprocess orchestration'
+        ],
+        technologies: ['Python', 'FastAPI', 'TypeScript', 'React', 'PostgreSQL', 'Alembic', 'Playwright', 'CDP', 'Tauri', 'Zustand', 'SSE', 'MCP', 'Claude Code', 'LLM Integration'],
+        achievements: [
+            'Pioneered core agent infrastructure from the ground up at an early-stage startup, directly shaping the technical foundation of the product',
+            'Delivered a fully autonomous end-to-end financial workflow — AI-generated reports through autonomous review, browser-based UAT, and publishing — with zero human intervention',
+            'Built production-ready multi-agent orchestration with self-healing escalation logic, establishing a reliable backbone for the startup\'s core offering',
+            'Shipped real-time streaming UI with live artifact rendering and SSE-based chat, accelerating stakeholder feedback cycles at startup speed',
+            'Integrated email automation enabling AI agents to independently monitor, parse, and act on incoming financial documents without human triggering'
         ]
     },
     'fns': {
@@ -236,6 +261,26 @@ const projectData = {
             'Integrated enterprise-grade authentication and cloud infrastructure'
         ]
     },
+    'athena': {
+        title: 'Athena Learning – UofT CSC301 Project Portal',
+        status: 'Completed',
+        description: 'A full-stack project portal built for UofT\'s CSC301 course, streamlining how industry proposals are submitted, approved, and assigned to student teams — eliminating manual coordination entirely.',
+        features: [
+            'Secure proposal submission, approval, and team assignment APIs built with TypeScript, Prisma, and PostgreSQL',
+            'Role-based workflows for industry partners, instructors, and student teams via a React frontend',
+            'SCRUM-led development with sprint coordination and architecture decisions across the full team',
+            'Production deployment on Railway with configured databases, environment variables, and CI/CD',
+            'Automated project matching flow replacing manual coordination for courses like CSC301'
+        ],
+        technologies: ['TypeScript', 'Prisma', 'PostgreSQL', 'React', 'Railway', 'CI/CD', 'REST APIs'],
+        highlights: [
+            'Led team as SCRUM Master and Lead Backend Developer, guiding architecture and ensuring timely delivery',
+            'Designed and built scalable backend APIs handling the full proposal lifecycle end-to-end',
+            'Deployed a production-ready system on Railway with CI/CD, eliminating environment inconsistencies',
+            'Significantly improved project matching efficiency for industry-partnered university courses',
+            'Delivered seamless role-based workflows for three distinct user groups across the portal'
+        ]
+    },
     'libtrack': {
         title: 'LibTrack - Library Management System',
         status: 'Completed',
@@ -265,6 +310,10 @@ function openCareerModal(careerId) {
     
     if (!career) return;
     
+    var linkedinBtn = career.linkedin
+        ? '<a href="' + career.linkedin + '" target="_blank" rel="noopener noreferrer" class="modal-linkedin-btn"><i class="fa-brands fa-linkedin"></i></a>'
+        : '';
+
     modalBody.innerHTML = `
         <div class="modal-career">
             <div class="modal-header">
@@ -276,23 +325,24 @@ function openCareerModal(careerId) {
                         <span class="duration">${career.duration}</span>
                     </div>
                 </div>
+                ` + linkedinBtn + `
             </div>
             <p class="modal-description">${career.description}</p>
-            
+
             <div class="modal-section">
                 <h3>Key Responsibilities</h3>
                 <ul class="responsibility-list">
                     ${career.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
                 </ul>
             </div>
-            
+
             <div class="modal-section">
                 <h3>Technologies & Tools</h3>
                 <div class="modal-tech-stack">
                     ${career.technologies.map(tech => `<span class="modal-tech-tag">${tech}</span>`).join('')}
                 </div>
             </div>
-            
+
             <div class="modal-section">
                 <h3>Key Achievements</h3>
                 <ul class="achievement-list">
@@ -301,7 +351,7 @@ function openCareerModal(careerId) {
             </div>
         </div>
     `;
-    
+
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
@@ -410,6 +460,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+});
+
+// Hero parallax fade on scroll
+window.addEventListener('scroll', function() {
+    var heroContent = document.querySelector('.hero-content');
+    var scrollIndicator = document.querySelector('.scroll-indicator');
+    if (heroContent) {
+        var scrolled = window.scrollY;
+        var vh = window.innerHeight;
+        if (scrolled < vh) {
+            var progress = scrolled / vh;
+            heroContent.style.opacity = 1 - progress * 1.6;
+            heroContent.style.transform = 'translateY(' + (scrolled * 0.22) + 'px)';
+            if (scrollIndicator) scrollIndicator.style.opacity = 1 - progress * 3;
+        }
+    }
 });
 
 // Add scroll effect to navbar
@@ -574,6 +640,36 @@ function updateLogos(theme) {
     });
 }
 
+// ============================================================
+// MODERN UI: Typewriter + Scroll Reveal
+// ============================================================
+
+function typeWriter(element, text, speed) {
+    speed = speed || 45;
+    var i = 0;
+    element.textContent = '';
+    element.classList.add('typing');
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        } else {
+            element.classList.remove('typing');
+        }
+    }
+    type();
+}
+
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
 // Initialize theme on page load
 document.addEventListener('DOMContentLoaded', function() {
     const savedTheme = localStorage.getItem('theme');
@@ -593,4 +689,141 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', 'dark');
         }
     }
+
+    // Typewriter on hero subtitle
+    var subtitle = document.querySelector('.hero-subtitle');
+    if (subtitle) {
+        var originalText = subtitle.textContent;
+        setTimeout(function() { typeWriter(subtitle, originalText, 40); }, 600);
+    }
+
+    // Scroll reveal: attach class to all target elements
+    var revealTargets = document.querySelectorAll(
+        '.career-card, .project-card, .education-card, .achievement-item, .contact-method'
+    );
+    revealTargets.forEach(function(el) {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
+
+    var revealLeftTargets = document.querySelectorAll('.section-title');
+    revealLeftTargets.forEach(function(el) {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
 });
+
+// --- 1. Scramble Text on Hero Name ---
+(function() {
+    var el = document.querySelector('.hero-name');
+    if (!el) return;
+    var final = el.textContent.trim();
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%';
+    var resolved = 0;
+    var total = final.length;
+    var frame = 0;
+
+    function scramble() {
+        el.textContent = final.split('').map(function(ch, i) {
+            if (ch === ' ') return ' ';
+            if (i < resolved) return ch;
+            return chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+        frame++;
+        if (frame % 3 === 0 && resolved < total) resolved++;
+        if (resolved < total) requestAnimationFrame(scramble);
+        else el.textContent = final;
+    }
+
+    setTimeout(scramble, 200);
+})();
+
+
+// --- 3. Curtain Section Transition ---
+(function() {
+    var overlay = document.querySelector('.page-overlay');
+    if (!overlay) return;
+    var busy = false;
+
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var href = link.getAttribute('href');
+            if (!href || !href.startsWith('#') || busy) return;
+            e.preventDefault();
+            busy = true;
+
+            overlay.classList.remove('sweep-out');
+            overlay.classList.add('sweep-in');
+
+            setTimeout(function() {
+                var target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'instant' });
+
+                overlay.classList.remove('sweep-in');
+                overlay.classList.add('sweep-out');
+
+                setTimeout(function() {
+                    overlay.classList.remove('sweep-out');
+                    busy = false;
+                }, 460);
+            }, 460);
+        });
+    });
+})();
+
+
+// --- Custom Cursor ---
+(function() {
+    var dot  = document.querySelector('.cursor-dot');
+    var ring = document.querySelector('.cursor-ring');
+    if (!dot || !ring) return;
+
+    var mouseX = 0, mouseY = 0;
+    var ringX  = 0, ringY  = 0;
+    var raf;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top  = mouseY + 'px';
+    });
+
+    // Ring follows with slight lag
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top  = ringY + 'px';
+        raf = requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Hover expand on interactive elements
+    var hoverTargets = 'a, button, [onclick], .career-card, .project-card, .course-item, .contact-method, .social-link, .close, .dark-mode-toggle';
+    document.querySelectorAll(hoverTargets).forEach(function(el) {
+        el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
+    });
+
+    // Click shrink
+    document.addEventListener('mousedown', function() {
+        dot.classList.add('clicking');
+        ring.classList.add('clicking');
+        ring.classList.remove('hovering');
+    });
+    document.addEventListener('mouseup', function() {
+        dot.classList.remove('clicking');
+        ring.classList.remove('clicking');
+    });
+
+    // Hide when leaving window
+    document.addEventListener('mouseleave', function() {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', function() {
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+    });
+})();

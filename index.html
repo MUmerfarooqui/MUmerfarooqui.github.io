@@ -6,11 +6,16 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Umer Farooqui - Portfolio</title>
 </head>
 <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="page-overlay"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -26,6 +31,7 @@
             
             <div class="nav-menu" id="navMenu">
                 <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
                 <a href="#education" class="nav-link">Education</a>
                 <a href="#career" class="nav-link">Career</a>
                 <a href="#projects" class="nav-link">Projects</a>
@@ -52,53 +58,99 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <p class="hero-label">&lt; umer.farooqui() /&gt;</p>
+            <h1 class="hero-name">Muhammad Umer Farooqui</h1>
+            <h2 class="hero-subtitle">&gt; AI/ML Developer &amp; CS Student @ UofT</h2>
+            <div class="hero-ctas">
+                <a href="#career" class="hero-btn-primary">View Work</a>
+                <a href="#contact" class="hero-btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
+            <h2 class="section-title">About</h2>
             <div class="about-content-grid">
                 <div class="about-text">
-                    <h1>Muhammad Umer Farooqui</h1>
-                    <h2>Computer Science Student & AI/ML Developer</h2>
-                    <p class="intro">Passionate Computer Science major with Statistics minor at University of Toronto. 
-                    Experienced in full-stack development, AI/ML solutions, and building scalable applications. 
+                    <p class="intro">Passionate Computer Science major with Statistics minor at University of Toronto.
+                    Experienced in full-stack development, AI/ML solutions, and building scalable applications.
                     Currently working as an AI/SWE Intern at Incubella and Developer Intern at Rabyt.</p>
-                    
-                    <p class="personal-info">Ethnically from Pakistan, I bring a global perspective to my work. 
+
+                    <p class="personal-info">Ethnically from Pakistan, I bring a global perspective to my work.
                     When I'm not coding, you'll find me playing cricket, football, or capturing moments through photography.</p>
-                    
+
                     <div class="instagram-link">
                         <a href="https://www.instagram.com/_.frookie_/" target="_blank" rel="noopener noreferrer" class="social-link-large">
                             <i class="fa-brands fa-instagram"></i>
                             <span>Follow my photography journey</span>
                         </a>
                     </div>
-                    
-                    <div class="quick-stats">
-                        <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Programming Languages</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">3</span>
-                            <span class="stat-label">Companies Worked</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Courses Completed</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Tech Stacks</span>
-                        </div>
-                    </div>
                 </div>
-                
+
                 <div class="about-logo">
                     <div class="uoft-logo-container">
                         <img src="images/University_of_Toronto-Logo.wine.svg" alt="University of Toronto Logo" class="uoft-logo">
                         <p class="logo-caption">University of Toronto<br>St. George Campus</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-categories">
+
+                <div class="skill-group">
+                    <p class="skill-group-label"><i class="fas fa-code"></i> Languages</p>
+                    <div class="skill-chips">
+                        <div class="skill-chip"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+                        <div class="skill-chip"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+                        <div class="skill-chip"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+                        <div class="skill-chip"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+                        <div class="skill-chip"><i class="devicon-csharp-plain colored"></i><span>C#</span></div>
+                        <div class="skill-chip"><i class="devicon-c-plain colored"></i><span>C</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <p class="skill-group-label"><i class="fas fa-layer-group"></i> Frameworks & Tools</p>
+                    <div class="skill-chips">
+                        <div class="skill-chip"><i class="devicon-react-original colored"></i><span>React</span></div>
+                        <div class="skill-chip"><i class="devicon-nextjs-plain"></i><span>Next.js</span></div>
+                        <div class="skill-chip"><i class="devicon-fastapi-plain colored"></i><span>FastAPI</span></div>
+                        <div class="skill-chip"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+                        <div class="skill-chip"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
+                        <div class="skill-chip"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
+                        <div class="skill-chip"><i class="devicon-electron-original colored"></i><span>Electron</span></div>
+                        <div class="skill-chip"><i class="devicon-prisma-original"></i><span>Prisma</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <p class="skill-group-label"><i class="fas fa-robot"></i> AI / ML & DevOps</p>
+                    <div class="skill-chips">
+                        <div class="skill-chip"><i class="fas fa-brain"></i><span>LLM Integration</span></div>
+                        <div class="skill-chip"><i class="fas fa-network-wired"></i><span>Agentic Systems</span></div>
+                        <div class="skill-chip"><i class="devicon-pytorch-plain colored"></i><span>PyTorch</span></div>
+                        <div class="skill-chip"><i class="fas fa-robot"></i><span>Hugging Face</span></div>
+                        <div class="skill-chip"><i class="devicon-playwright-plain colored"></i><span>Playwright</span></div>
+                        <div class="skill-chip"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+                        <div class="skill-chip"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -183,11 +235,28 @@
         <div class="container">
             <h2 class="section-title">Career</h2>
             <div class="career-timeline">
+                <div class="career-card" onclick="openCareerModal('genledge')">
+                    <div class="career-header">
+                        <div class="career-title">
+                            <h3>Software Engineering Intern</h3>
+                            <span class="company">GenLedge – <a href="https://genledge.ai/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">genledge.ai</a> <a href="https://www.linkedin.com/company/genledge/posts/?feedView=all" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="company-linkedin"><i class="fa-brands fa-linkedin"></i></a></span>
+                        </div>
+                        <span class="duration">2025 – Present</span>
+                    </div>
+                    <p>Engineered autonomous agent infrastructure for an AI-powered accounting automation startup. Built multi-agent orchestration pipelines, full artifact lifecycle systems, and real-time streaming interfaces enabling AI employees to deliver financial work end-to-end.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python/FastAPI</span>
+                        <span class="tech-tag">TypeScript/React</span>
+                        <span class="tech-tag">Agentic AI</span>
+                        <span class="tech-tag">Playwright</span>
+                    </div>
+                </div>
+
                 <div class="career-card" onclick="openCareerModal('incubella')">
                     <div class="career-header">
                         <div class="career-title">
                             <h3>AI/SWE Intern</h3>
-                            <span class="company">Incubella – <a href="https://mysentiment.ai" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"></a>MySentiment.ai</a> / <a href="https://incubella.co" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">incubella.co</a></span>
+                            <span class="company">Incubella – <a href="https://mysentiment.ai" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"></a>MySentiment.ai</a> / <a href="https://incubella.co" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">incubella.co</a> <a href="https://www.linkedin.com/company/incubella/posts/?feedView=all" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="company-linkedin"><i class="fa-brands fa-linkedin"></i></a></span>
                         </div>
                         <span class="duration">Jun 2025 – Sep 2025</span>
                     </div>
@@ -199,14 +268,14 @@
                         <span class="tech-tag">Hugging Face</span>
                     </div>
                 </div>
-                
+
                 <div class="career-card" onclick="openCareerModal('rabyt')">
                     <div class="career-header">
                         <div class="career-title">
                             <h3>Developer Intern</h3>
-                            <span class="company">Rabyt – <a href="https://rabyt.ai" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Rabyt.ai</a></span>
+                            <span class="company">Rabyt – <a href="https://rabyt.ai" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Rabyt.ai</a> <a href="https://www.linkedin.com/company/rabytai/posts/?feedView=all" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="company-linkedin"><i class="fa-brands fa-linkedin"></i></a></span>
                         </div>
-                        <span class="duration">Jun 2025 – Present</span>
+                        <span class="duration">May 2025 – Jun 2025</span>
                     </div>
                     <p>Developed cross-platform desktop application using Electron.js. Integrated spreadsheet processing with Univer and SheetJS libraries for financial data visualization and AI-driven analysis features.</p>
                     <div class="tech-tags">
@@ -216,7 +285,7 @@
                         <span class="tech-tag">Financial Tech</span>
                     </div>
                 </div>
-                
+
                 <div class="career-card" onclick="openCareerModal('fns')">
                     <div class="career-header">
                         <div class="career-title">
@@ -324,6 +393,23 @@
                 </div>
 
                 <!-- Project Card 6 -->
+                <div class="project-card" onclick="openProjectModal('athena')">
+                    <div class="project-preview">
+                        <div class="project-header">
+                            <h3>Athena Learning</h3>
+                            <span class="project-status">Completed</span>
+                        </div>
+                        <p class="project-description">UofT CSC301 industry project portal for proposal submission, approval, and team assignment</p>
+                        <div class="tech-stack">
+                            <span>TypeScript</span>
+                            <span>Prisma</span>
+                            <span>PostgreSQL</span>
+                            <span>React</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 7 -->
                 <div class="project-card" onclick="openProjectModal('libtrack')">
                     <div class="project-preview">
                         <div class="project-header">
