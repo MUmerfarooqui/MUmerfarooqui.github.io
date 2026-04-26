@@ -14,7 +14,10 @@
       "WebFetch(domain:adjwilli.github.io)",
       "WebFetch(domain:aakashrajbanshi.com.np)",
       "WebFetch(domain:aakash-sharma.netlify.app)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:bugs.chromium.org)",
+      "WebFetch(domain:issues.chromium.org)",
+      "WebFetch(domain:www.icelab.com.au)"
     ]
   }
 }

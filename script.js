@@ -745,7 +745,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!overlay) return;
     var busy = false;
 
-    document.querySelectorAll('.nav-link').forEach(function(link) {
+    document.querySelectorAll('.nav-link, .hero-btn-primary, .hero-btn-secondary').forEach(function(link) {
         link.addEventListener('click', function(e) {
             var href = link.getAttribute('href');
             if (!href || !href.startsWith('#') || busy) return;
@@ -765,6 +765,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     overlay.classList.remove('sweep-out');
                     busy = false;
+                    // Flash the section title once the curtain fully reveals
+                    var title = target && target.querySelector('.section-title');
+                    if (title) {
+                        title.classList.remove('flashing');
+                        void title.offsetWidth; // force reflow to restart animation
+                        title.classList.add('flashing');
+                    }
                 }, 460);
             }, 460);
         });
@@ -780,7 +787,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var mouseX = 0, mouseY = 0;
     var ringX  = 0, ringY  = 0;
-    var raf;
 
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
@@ -789,24 +795,20 @@ document.addEventListener('DOMContentLoaded', function() {
         dot.style.top  = mouseY + 'px';
     });
 
-    // Ring follows with slight lag
-    function animateRing() {
+    (function animateRing() {
         ringX += (mouseX - ringX) * 0.18;
         ringY += (mouseY - ringY) * 0.18;
         ring.style.left = ringX + 'px';
         ring.style.top  = ringY + 'px';
-        raf = requestAnimationFrame(animateRing);
-    }
-    animateRing();
+        requestAnimationFrame(animateRing);
+    })();
 
-    // Hover expand on interactive elements
     var hoverTargets = 'a, button, [onclick], .career-card, .project-card, .course-item, .contact-method, .social-link, .close, .dark-mode-toggle';
     document.querySelectorAll(hoverTargets).forEach(function(el) {
         el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
         el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
     });
 
-    // Click shrink
     document.addEventListener('mousedown', function() {
         dot.classList.add('clicking');
         ring.classList.add('clicking');
@@ -816,14 +818,262 @@ document.addEventListener('DOMContentLoaded', function() {
         dot.classList.remove('clicking');
         ring.classList.remove('clicking');
     });
+})();
 
-    // Hide when leaving window
-    document.addEventListener('mouseleave', function() {
-        dot.style.opacity = '0';
-        ring.style.opacity = '0';
+
+// --- 3D Card Tilt ---
+(function() {
+    var cards = document.querySelectorAll('.career-card, .project-card');
+    var MAX = 7;
+
+    cards.forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            // Disable transform transition while tilting for instant response
+            card.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+        });
+
+        card.addEventListener('mousemove', function(e) {
+            var r   = card.getBoundingClientRect();
+            var dx  = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+            var dy  = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+            var rotY =  dx * MAX;
+            var rotX = -dy * MAX;
+            card.style.transform = 'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(6px)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease';
+            card.style.transform  = '';
+            // Let transition finish, then restore original CSS-driven transition
+            setTimeout(function() { card.style.transition = ''; card.style.transform = ''; }, 500);
+        });
     });
-    document.addEventListener('mouseenter', function() {
-        dot.style.opacity = '1';
-        ring.style.opacity = '1';
+})();
+
+
+// --- Active Nav Highlight ---
+(function() {
+    var sections  = document.querySelectorAll('section[id]');
+    var navLinks  = document.querySelectorAll('.nav-link');
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            var id = entry.target.getAttribute('id');
+            navLinks.forEach(function(link) {
+                var active = link.getAttribute('href') === '#' + id;
+                link.classList.toggle('active', active);
+            });
+        });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(function(s) { observer.observe(s); });
+})();
+
+
+// --- Scroll Progress Bar ---
+(function() {
+    var bar = document.querySelector('.scroll-progress-bar');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+        var total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+    }, { passive: true });
+})();
+
+
+
+// --- About Text Line Reveal ---
+(function() {
+    var items = document.querySelectorAll('.about-text .intro, .about-text .personal-info, .about-text .instagram-link');
+    items.forEach(function(el, i) {
+        el.style.opacity   = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.65s ease ' + (i * 0.2) + 's, transform 0.65s ease ' + (i * 0.2) + 's';
     });
+
+    var section = document.querySelector('.about-text');
+    if (!section) return;
+
+    new IntersectionObserver(function(entries, obs) {
+        if (!entries[0].isIntersecting) return;
+        items.forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
+        obs.disconnect();
+    }, { threshold: 0.15 }).observe(section);
+})();
+
+
+// --- Section Entrance Flash ---
+(function() {
+    var titles = document.querySelectorAll('.section-title');
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('flashing');
+                void entry.target.offsetWidth;
+                entry.target.classList.add('flashing');
+            } else {
+                entry.target.classList.remove('flashing');
+            }
+        });
+    }, { threshold: 0.8 });
+    titles.forEach(function(t) { obs.observe(t); });
+})();
+
+
+// --- Hero Particle Field ---
+(function() {
+    var hero = document.querySelector('.hero-section');
+    if (!hero) return;
+
+    var canvas = document.createElement('canvas');
+    canvas.className = 'hero-particles';
+    hero.insertBefore(canvas, hero.firstChild);
+    var ctx = canvas.getContext('2d');
+
+    var W, H, particles;
+    var N = 55, MAX_DIST = 130;
+
+    function init() {
+        W = canvas.width  = hero.offsetWidth;
+        H = canvas.height = hero.offsetHeight;
+        particles = [];
+        for (var i = 0; i < N; i++) {
+            particles.push({
+                x:  Math.random() * W,
+                y:  Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+                r:  Math.random() * 1.5 + 0.8
+            });
+        }
+    }
+    init();
+    window.addEventListener('resize', init);
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Move & bounce
+        particles.forEach(function(p) {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1;
+            if (p.y < 0 || p.y > H) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(34,211,238,0.55)';
+            ctx.fill();
+        });
+
+        // Connections
+        for (var i = 0; i < N; i++) {
+            for (var j = i + 1; j < N; j++) {
+                var dx   = particles[i].x - particles[j].x;
+                var dy   = particles[i].y - particles[j].y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DIST) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgba(34,211,238,' + ((1 - dist / MAX_DIST) * 0.18) + ')';
+                    ctx.lineWidth   = 0.6;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+
+// --- Project Card Code Peek ---
+(function() {
+    var snippets = {
+        'trippy':        '<span class="cm"># Multi-agent travel planner</span>\n<span class="kw">async def</span> <span class="fn">plan_trip</span>(prefs):\n    agents = [<span class="str">"flights"</span>, <span class="str">"hotels"</span>, <span class="str">"itinerary"</span>]\n    chain = LangChain.sequence(agents)\n    <span class="kw">return await</span> chain.invoke(prefs)',
+        'learnai':       '<span class="cm"># RAG pipeline for learning</span>\n<span class="kw">def</span> <span class="fn">query_rag</span>(question):\n    ctx = vectorstore.similarity_search(question)\n    prompt = build_prompt(ctx, question)\n    <span class="kw">return</span> llm.generate(prompt)',
+        'uoft-messenger':'<span class="cm">// Real-time message handler</span>\n<span class="kw">public void</span> <span class="fn">sendMessage</span>(User to, String msg) {\n    Message m = <span class="kw">new</span> Message(<span class="kw">this</span>, to, msg);\n    socket.emit(<span class="str">"msg"</span>, m.toJSON());\n    db.save(m);\n}',
+        'healthy':       '<span class="cm"># Heart disease risk predictor</span>\n<span class="kw">def</span> <span class="fn">predict_risk</span>(metrics):\n    X = scaler.transform([metrics])\n    prob = model.predict_proba(X)[0][1]\n    <span class="kw">return</span> {<span class="str">"risk"</span>: f<span class="str">"{prob:.1%}"</span>}',
+        'flowcraft':     '<span class="cm"># Gmail workflow automation</span>\n<span class="kw">async def</span> <span class="fn">auto_reply</span>(trigger):\n    emails = <span class="kw">await</span> gmail.fetch(trigger.filter)\n    <span class="kw">for</span> e <span class="kw">in</span> emails:\n        draft = llm.compose(e.thread)\n        <span class="kw">await</span> n8n.execute(draft)',
+        'athena':        '<span class="cm">// Proposal lifecycle API</span>\n<span class="kw">export const</span> <span class="fn">assignTeam</span> = <span class="kw">async</span> (id) => {\n    <span class="kw">const</span> p = <span class="kw">await</span> prisma.proposal.update({\n        where: { id },\n        data:  { status: <span class="str">"assigned"</span> }\n    });\n    <span class="kw">return</span> p;\n}',
+        'libtrack':      '<span class="cm">// Book checkout handler</span>\n<span class="kw">const</span> <span class="fn">checkout</span> = <span class="kw">async</span> (req, res) => {\n    <span class="kw">const</span> book = <span class="kw">await</span> Book.findById(req.params.id);\n    book.available = <span class="kw">false</span>;\n    <span class="kw">await</span> book.save();\n    res.json({ success: <span class="kw">true</span> });\n}'
+    };
+
+    document.querySelectorAll('.project-card[onclick]').forEach(function(card) {
+        var match = card.getAttribute('onclick').match(/'([^']+)'/);
+        if (!match || !snippets[match[1]]) return;
+        var peek = document.createElement('div');
+        peek.className = 'code-peek';
+        peek.innerHTML = '<pre>' + snippets[match[1]] + '</pre>';
+        card.appendChild(peek);
+    });
+})();
+
+
+// --- Project Card Accent Colors ---
+(function() {
+    var colors = {
+        'trippy':        '#a855f7',
+        'learnai':       '#60a5fa',
+        'uoft-messenger':'#34d399',
+        'healthy':       '#f43f5e',
+        'flowcraft':     '#f59e0b',
+        'athena':        '#22d3ee',
+        'libtrack':      '#8b5cf6'
+    };
+
+    function hexToRgba(hex, a) {
+        var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+        return 'rgba('+r+','+g+','+b+','+a+')';
+    }
+
+    var cards = document.querySelectorAll('.project-card[onclick]');
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            var card  = entry.target;
+            var match = card.getAttribute('onclick').match(/'([^']+)'/);
+            var color = match && colors[match[1]];
+            if (!color) return;
+            card.style.setProperty('--card-accent-color', hexToRgba(color, 0.45));
+            card.style.setProperty('--card-accent-glow',  hexToRgba(color, 0.13));
+            card.classList.add('accented');
+            obs.unobserve(card);
+        });
+    }, { threshold: 0.35 });
+
+    cards.forEach(function(c) { obs.observe(c); });
+})();
+
+
+// --- Skill Chips Staggered Pop-in ---
+(function() {
+    var section = document.querySelector('.skills-section');
+    if (!section) return;
+    var chips = section.querySelectorAll('.skill-chip');
+
+    chips.forEach(function(chip) {
+        chip.style.opacity   = '0';
+        chip.style.transform = 'scale(0.3)';
+    });
+
+    new IntersectionObserver(function(entries, obs) {
+        if (!entries[0].isIntersecting) return;
+        chips.forEach(function(chip, i) {
+            setTimeout(function() {
+                chip.style.transition = 'opacity 0.35s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+                chip.style.opacity    = '1';
+                chip.style.transform  = 'scale(1)';
+                setTimeout(function() {
+                    chip.style.transition = '';
+                    chip.style.transform  = '';
+                    chip.style.opacity    = '';
+                }, 460);
+            }, i * 70);
+        });
+        obs.disconnect();
+    }, { threshold: 0.15 }).observe(section);
 })();

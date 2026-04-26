@@ -1339,6 +1339,41 @@ section {
 
 /* JetBrains Mono loaded via HTML <link> in <head> */
 
+/* --- Grain / Noise Texture --- */
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9990;
+    opacity: 0.038;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+}
+[data-theme="light"] .grain-overlay { opacity: 0.018; }
+
+/* --- Hero Particle Canvas --- */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- Scroll Progress Bar --- */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, #22d3ee 0%, #818cf8 100%);
+    z-index: 1001;
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+}
+
 /* --- Custom Cursor --- */
 body { cursor: none; }
 a, button, [onclick], .career-card, .project-card, .course-item, .contact-method { cursor: none; }
@@ -1352,8 +1387,8 @@ a, button, [onclick], .career-card, .project-card, .course-item, .contact-method
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.08s ease, background 0.2s ease, opacity 0.2s ease;
-    will-change: transform;
+    transition: transform 0.08s ease, background 0.2s ease;
+    will-change: left, top;
 }
 
 .cursor-ring {
@@ -1365,19 +1400,16 @@ a, button, [onclick], .career-card, .project-card, .course-item, .contact-method
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: transform 0.12s ease, width 0.25s ease, height 0.25s ease,
-                border-color 0.25s ease, background 0.25s ease, opacity 0.2s ease;
-    will-change: transform;
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    will-change: left, top;
 }
 
-/* Hover state — ring expands, fills slightly */
 .cursor-ring.hovering {
     width: 48px; height: 48px;
     border-color: rgba(34, 211, 238, 0.9);
     background: rgba(34, 211, 238, 0.07);
 }
 
-/* Click state — ring shrinks */
 .cursor-ring.clicking {
     width: 20px; height: 20px;
     background: rgba(34, 211, 238, 0.18);
@@ -1387,7 +1419,6 @@ a, button, [onclick], .career-card, .project-card, .course-item, .contact-method
     transform: translate(-50%, -50%) scale(0.4);
 }
 
-/* Hide on mobile (touch devices don't need it) */
 @media (hover: none) {
     .cursor-dot, .cursor-ring { display: none; }
     body { cursor: auto; }
@@ -1667,12 +1698,23 @@ a, button, [onclick], .career-card, .project-card, .course-item, .contact-method
     transition: width 0.25s ease;
 }
 .nav-link:hover::after { width: 100%; }
+.nav-link.active { color: var(--primary-color); }
+.nav-link.active::after {
+    width: 100%;
+    box-shadow: 0 0 8px var(--primary-color);
+}
 
 /* --- Section Titles: // prefix --- */
 .section-title {
     position: relative;
     padding-bottom: 0.5rem;
 }
+@keyframes sectionFlash {
+    0%   { color: inherit; text-shadow: none; }
+    30%  { color: var(--primary-color); text-shadow: 0 0 18px rgba(34,211,238,0.7), 0 0 36px rgba(34,211,238,0.3); }
+    100% { color: inherit; text-shadow: none; }
+}
+.section-title.flashing { animation: sectionFlash 1s ease forwards; }
 .section-title::after {
     content: '';
     display: block;
@@ -1711,17 +1753,50 @@ a, button, [onclick], .career-card, .project-card, .course-item, .contact-method
 
 /* --- Glassmorphism: Project Cards --- */
 .project-card {
+    position: relative;
     background: rgba(17, 24, 39, 0.65);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(34, 211, 238, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.6s ease;
 }
 .project-card:hover {
     transform: translateY(-7px);
     border-color: rgba(34, 211, 238, 0.3);
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(34, 211, 238, 0.07);
 }
+
+/* Accent color on scroll into view */
+.project-card.accented {
+    border-color: var(--card-accent-color, rgba(34,211,238,0.35)) !important;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 35px var(--card-accent-glow, rgba(34,211,238,0.12)) !important;
+}
+
+/* Code peek overlay */
+.code-peek {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 7, 18, 0.93);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: inherit;
+    padding: 1.3rem 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.71rem;
+    line-height: 1.75;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 2;
+}
+.project-card:hover .code-peek { opacity: 1; }
+.code-peek .kw  { color: #818cf8; }
+.code-peek .fn  { color: #22d3ee; }
+.code-peek .str { color: #86efac; }
+.code-peek .cm  { color: #475569; font-style: italic; }
 [data-theme="light"] .project-card {
     background: #ffffff;
     backdrop-filter: none;
