@@ -55,12 +55,12 @@ const scholarshipsData = [
     {
         name: 'Mary Emily Pearson Scholarship',
         description: 'Awarded for academic excellence and leadership potential',
-        icon: 'fas fa-medal'
+        icon: 'fas fa-award'
     },
     {
         name: 'The Susan And Murray Armitage Scholarship I',
         description: 'Recognition of outstanding academic achievement in Computer Science',
-        icon: 'fas fa-trophy'
+        icon: 'fas fa-award'
     },
     {
         name: 'The Regents In-Course Scholarship',
@@ -71,6 +71,30 @@ const scholarshipsData = [
 
 // Career data for modals
 const careerData = {
+    'martinrea': {
+        title: 'Software Engineering Intern',
+        company: 'Martinrea International – <a href="https://martinrea.com" target="_blank" rel="noopener noreferrer">martinrea.com</a>',
+        linkedin: 'https://www.linkedin.com/company/martinreainternational',
+        location: 'Vaughan, ON',
+        duration: '2026 – Present',
+        description: 'Engineering full-stack manufacturing software at a global automotive supplier, connecting shop-floor PLCs and machinery to modern, data-driven web systems used by engineers and operators alike.',
+        responsibilities: [
+            'Architected end-to-end system designs spanning embedded/PLC data sources through backend services to web-based dashboards',
+            'Developed backend services and tooling in C++, Python, and Node.js to support plant-floor data processing and automation',
+            'Built responsive front-end interfaces with React and TypeScript for engineers and operators to monitor and interact with production systems',
+            'Designed and optimized SQL database schemas to support manufacturing traceability, reporting, and historical analysis',
+            'Integrated directly with PLCs and shop-floor machinery to build real-time data acquisition and monitoring pipelines',
+            'Conducted requirements-gathering sessions with machine operators, translating floor-level workflows into software specifications',
+            'Improved application performance through caching strategies and targeted optimization across data-heavy services'
+        ],
+        technologies: ['C++', 'Python', 'Node.js', 'React', 'TypeScript', 'SQL', 'PLC Integration', 'System Design', 'Caching'],
+        achievements: [
+            'Delivered end-to-end systems bridging shop-floor PLCs and machinery with modern web dashboards',
+            'Improved software performance through caching and system-level optimization',
+            'Strengthened database design practices for manufacturing traceability and reporting',
+            'Bridged engineering and shop-floor operations through direct collaboration with machine operators'
+        ]
+    },
     'incubella': {
         title: 'AI/SWE Intern',
         company: 'Incubella – <a href="https://mysentiment.ai" target="_blank" rel="noopener noreferrer">MySentiment.ai</a> / <a href="https://incubella.co" target="_blank" rel="noopener noreferrer">incubella.co</a>',
@@ -120,7 +144,7 @@ const careerData = {
         company: 'GenLedge – <a href="https://genledge.ai/" target="_blank" rel="noopener noreferrer">genledge.ai</a>',
         linkedin: 'https://www.linkedin.com/company/genledge/posts/?feedView=all',
         location: 'Toronto, ON',
-        duration: '2025 – Present',
+        duration: '2025 – 2026',
         description: 'Engineered autonomous agent infrastructure for an early-stage AI-powered accounting automation startup, enabling AI employees to independently execute, review, and deliver financial work end-to-end with zero human intervention.',
         responsibilities: [
             'Designed and implemented multi-agent orchestration pipelines in Python and FastAPI, enabling autonomous task handoff, peer review, and self-healing escalation across AI employees',
@@ -781,42 +805,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // --- Custom Cursor ---
 (function() {
-    var dot  = document.querySelector('.cursor-dot');
-    var ring = document.querySelector('.cursor-ring');
-    if (!dot || !ring) return;
+    var brackets = document.querySelector('.cursor-brackets');
+    if (!brackets) return;
 
     var mouseX = 0, mouseY = 0;
-    var ringX  = 0, ringY  = 0;
+    var curX   = 0, curY   = 0;
 
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        dot.style.left = mouseX + 'px';
-        dot.style.top  = mouseY + 'px';
     });
 
-    (function animateRing() {
-        ringX += (mouseX - ringX) * 0.18;
-        ringY += (mouseY - ringY) * 0.18;
-        ring.style.left = ringX + 'px';
-        ring.style.top  = ringY + 'px';
-        requestAnimationFrame(animateRing);
+    (function animate() {
+        curX += (mouseX - curX) * 0.35;
+        curY += (mouseY - curY) * 0.35;
+        brackets.style.left = curX + 'px';
+        brackets.style.top  = curY + 'px';
+        requestAnimationFrame(animate);
     })();
 
     var hoverTargets = 'a, button, [onclick], .career-card, .project-card, .course-item, .contact-method, .social-link, .close, .dark-mode-toggle';
     document.querySelectorAll(hoverTargets).forEach(function(el) {
-        el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
-        el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
+        el.addEventListener('mouseenter', function() { brackets.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { brackets.classList.remove('hovering'); });
     });
 
     document.addEventListener('mousedown', function() {
-        dot.classList.add('clicking');
-        ring.classList.add('clicking');
-        ring.classList.remove('hovering');
+        brackets.classList.add('clicking');
+        brackets.classList.remove('hovering');
     });
     document.addEventListener('mouseup', function() {
-        dot.classList.remove('clicking');
-        ring.classList.remove('clicking');
+        brackets.classList.remove('clicking');
     });
 })();
 

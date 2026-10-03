@@ -14,8 +14,12 @@
 <body>
     <div class="grain-overlay"></div>
     <div class="scroll-progress-bar"></div>
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
+    <div class="cursor-brackets">
+        <span class="bracket tl"></span>
+        <span class="bracket tr"></span>
+        <span class="bracket bl"></span>
+        <span class="bracket br"></span>
+    </div>
     <div class="page-overlay"></div>
 
     <!-- Navigation -->
@@ -237,13 +241,30 @@
         <div class="container">
             <h2 class="section-title">Career</h2>
             <div class="career-timeline">
+                <div class="career-card" onclick="openCareerModal('martinrea')">
+                    <div class="career-header">
+                        <div class="career-title">
+                            <h3>Software Engineering Intern</h3>
+                            <span class="company">Martinrea International – <a href="https://martinrea.com" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">martinrea.com</a> <a href="https://www.linkedin.com/company/martinreainternational" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="company-linkedin"><i class="fa-brands fa-linkedin"></i></a></span>
+                        </div>
+                        <span class="duration">2026 – Present</span>
+                    </div>
+                    <p>Designed and built full-stack manufacturing software systems spanning PLC-integrated shop-floor data to web dashboards. Worked across C++, Python, Node.js, and React/TypeScript to deliver end-to-end solutions, driving system design, database architecture, and performance optimization through caching.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">C++/Python</span>
+                        <span class="tech-tag">Node.js/React</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">PLC Integration</span>
+                    </div>
+                </div>
+
                 <div class="career-card" onclick="openCareerModal('genledge')">
                     <div class="career-header">
                         <div class="career-title">
                             <h3>Software Engineering Intern</h3>
                             <span class="company">GenLedge – <a href="https://genledge.ai/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">genledge.ai</a> <a href="https://www.linkedin.com/company/genledge/posts/?feedView=all" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="company-linkedin"><i class="fa-brands fa-linkedin"></i></a></span>
                         </div>
-                        <span class="duration">2025 – Present</span>
+                        <span class="duration">2025 – 2026</span>
                     </div>
                     <p>Engineered autonomous agent infrastructure for an AI-powered accounting automation startup. Built multi-agent orchestration pipelines, full artifact lifecycle systems, and real-time streaming interfaces enabling AI employees to deliver financial work end-to-end.</p>
                     <div class="tech-tags">

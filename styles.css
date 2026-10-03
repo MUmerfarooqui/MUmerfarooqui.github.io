@@ -876,11 +876,14 @@ section {
 .responsibility-list li,
 .achievement-list li {
     padding: 0.75rem 0;
-    padding-left: 1.5rem;
-    position: relative;
     color: var(--text-secondary);
     line-height: 1.6;
     border-bottom: 1px solid var(--border-color);
+}
+
+.responsibility-list li {
+    padding-left: 1.5rem;
+    position: relative;
 }
 
 .responsibility-list li:last-child,
@@ -892,12 +895,6 @@ section {
     content: "▸";
     color: var(--primary-color);
     font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
-.achievement-list li::before {
-    content: "🏆";
     position: absolute;
     left: 0;
 }
@@ -1378,49 +1375,46 @@ section {
 body { cursor: none; }
 a, button, [onclick], .career-card, .project-card, .course-item, .contact-method { cursor: none; }
 
-.cursor-dot {
+.cursor-brackets {
     position: fixed;
     top: 0; left: 0;
-    width: 7px; height: 7px;
-    background: #22d3ee;
-    border-radius: 50%;
+    width: 24px; height: 24px;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.08s ease, background 0.2s ease;
+    transition: width 0.25s ease, height 0.25s ease;
     will-change: left, top;
 }
 
-.cursor-ring {
-    position: fixed;
-    top: 0; left: 0;
-    width: 34px; height: 34px;
-    border: 1.5px solid rgba(34, 211, 238, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    will-change: left, top;
+.bracket {
+    position: absolute;
+    width: 7px; height: 7px;
+    border: 1.5px solid var(--primary-color);
+    opacity: 0.55;
+    transition: opacity 0.25s ease, border-color 0.25s ease;
 }
 
-.cursor-ring.hovering {
-    width: 48px; height: 48px;
-    border-color: rgba(34, 211, 238, 0.9);
-    background: rgba(34, 211, 238, 0.07);
+.bracket.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.bracket.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.bracket.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.bracket.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.cursor-brackets.hovering {
+    width: 38px; height: 38px;
+}
+.cursor-brackets.hovering .bracket {
+    opacity: 0.9;
 }
 
-.cursor-ring.clicking {
-    width: 20px; height: 20px;
-    background: rgba(34, 211, 238, 0.18);
-    border-color: #22d3ee;
+.cursor-brackets.clicking {
+    width: 18px; height: 18px;
 }
-.cursor-dot.clicking {
-    transform: translate(-50%, -50%) scale(0.4);
+.cursor-brackets.clicking .bracket {
+    opacity: 1;
 }
 
 @media (hover: none) {
-    .cursor-dot, .cursor-ring { display: none; }
+    .cursor-brackets { display: none; }
     body { cursor: auto; }
     a, button, [onclick], .career-card, .project-card, .course-item, .contact-method { cursor: auto; }
 }
